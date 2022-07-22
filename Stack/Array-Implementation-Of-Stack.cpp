@@ -1,3 +1,7 @@
+/*
+    Stack using an array.
+*/
+
 #include <iostream>
 #include <cstdlib>
 
@@ -11,7 +15,7 @@ class Stack
 private:
     int top = -1;
     int A[MAX_SIZE];
-    
+
 public:
     void push(int x)
     {
@@ -49,6 +53,7 @@ public:
         cout << endl;
     }
 };
+
 
 int main()
 {

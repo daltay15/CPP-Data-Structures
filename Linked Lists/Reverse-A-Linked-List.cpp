@@ -1,5 +1,6 @@
 /*
     Reverse a singly linked list.
+    Popular interview question.
 */
 
 

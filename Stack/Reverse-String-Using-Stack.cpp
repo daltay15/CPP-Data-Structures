@@ -1,3 +1,8 @@
+/*
+    Given a string, reverse it using stack.
+*/
+
+
 #include <iostream>
 #include <cstdlib>
 #include <string.h>
