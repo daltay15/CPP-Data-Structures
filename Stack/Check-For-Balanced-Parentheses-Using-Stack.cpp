@@ -118,4 +118,4 @@ int main()
     cin.getline(c, size);
     cout << c << endl;
     s.isParenthesesBalanced(c, strlen(c));
-}
+} 

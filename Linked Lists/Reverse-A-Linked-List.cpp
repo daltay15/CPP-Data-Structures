@@ -70,5 +70,4 @@ int main()
     Print(head);
     head = Reverse(head);   // Reverse the list
     Print(head);            
-
 }
