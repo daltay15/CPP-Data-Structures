@@ -4,38 +4,41 @@
 using namespace std;
 
 #define MAX_SIZE 100
-int A[MAX_SIZE];
-int top = -1;
+
 
 class Stack
 {
+private:
+    int top = -1;
+    int A[MAX_SIZE];
+    
 public:
-    void Push(int x)
+    void push(int x)
     {
-        if (top == MAX_SIZE - 1)
+        if (top == MAX_SIZE - 1) // if the stack is full
         {
             cout << "ERROR: Stack Overflow" << endl;
             return;
         }
-        A[++top] = x;
+        A[++top] = x; // push the element to the stack
     }
 
-    void Pop()
+    void pop()
     {
-        if (top == -1)
+        if (top == -1) // if the stack is empty
         {
             cout << "ERROR: No elements to pop" << endl;
             return;
         }
-        top--;
+        top--; // pop the element from the stack
     }
 
     int Top()
     {
-        return A[top];
+        return A[top]; // return the data of the head
     }
 
-    void Print()
+    void print()
     {
         int i = 0;
         cout << "Stack:";
@@ -50,14 +53,14 @@ public:
 int main()
 {
     class Stack s;
-    s.Push(1);
-    s.Print();
-    s.Push(2);
-    s.Print();
-    s.Push(3);
-    s.Print();
-    s.Pop();
-    s.Print();
-    s.Pop();
-    s.Print();
+    s.push(1);
+    s.print();
+    s.push(2);
+    s.print();
+    s.push(3);
+    s.print();
+    s.pop();
+    s.print();
+    s.pop();
+    s.print();
 }
