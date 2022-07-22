@@ -37,7 +37,19 @@ void Print()
 
 int main()
 {
+    Node* head = NULL; // empty list
+    int n;
+    cout << "Enter the number of elements in the list: ";
+    cin >> n;
 
+    for (int i = 0; i < n; i++)
+    {
+        int x;  
+        cout << "Element " << i + 1 << ": ";
+        cin >> x;   
+        Insert(x);  
+        Print();    
+    }
 }
 
 
