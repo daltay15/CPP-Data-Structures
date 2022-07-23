@@ -96,6 +96,27 @@ int findMax(BstNode *root)
     }
 }
 
+int findHeight(BstNode *root)
+{
+    if (root == NULL)
+    {
+        return -1;
+    }
+    else // Recursively traverse the tree
+    {
+        int leftHeight = findHeight(root->left);
+        int rightHeight = findHeight(root->right);
+        if (leftHeight > rightHeight)
+        {
+            return leftHeight + 1;
+        }
+        else
+        {
+            return rightHeight + 1;
+        }
+    }
+}
+
 int main()
 {
     BstNode *root = NULL; // Initialize root to NULL
@@ -116,7 +137,7 @@ int main()
 
     cout << "The smallest number in the tree is: " << findMin(root) << endl;
     cout << "The largest number in the tree is: " << findMax(root) << endl;
-
+    cout << "The height of the tree is: " << findHeight(root) << endl;
     int number;
     cout << "Enter a number to search: ";
     cin >> number;
