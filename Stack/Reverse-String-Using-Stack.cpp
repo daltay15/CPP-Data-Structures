@@ -25,7 +25,7 @@ public:
             cout << "ERROR: Stack Overflow" << endl;
             return;
         }
-        A[++top] = x; // push the elemen to the stack
+        A[++top] = x; // push the element to the stack
     }
 
     void pop()
@@ -61,16 +61,16 @@ public:
         return false;
     }
 
-    void reverse(char c[], int n)
+    void reverse(char c[], int n)   // reverse the string using stack
     {
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)     // push the string to the stack
         {
-            push(c[i]);
+            push(c[i]); 
         }
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)     // pop the string from the stack
         {
-            c[i] = Top();
-            pop();
+            c[i] = Top();             // store the popped element in the string
+            pop();                  // pop the element from the stack
         }
     }
 };

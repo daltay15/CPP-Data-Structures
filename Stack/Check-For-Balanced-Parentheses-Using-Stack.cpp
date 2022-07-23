@@ -66,7 +66,7 @@ public:
     {
         for (int i = 0; i < n; i++)
         {
-            if (c[i] == '(' || c[i] == '{' || c[i] == '[')      
+            if (c[i] == '(' || c[i] == '{' || c[i] == '[')            
             {
                 push(c[i]);
             }
@@ -77,7 +77,7 @@ public:
                     cout << "Ubalanced Parentheses" << endl;    
                     return false;
                 }
-                else if (Top() == '(' && c[i] == ')')   
+                else if (Top() == '(' && c[i] == ')')       
                 {
                     pop();  
                 }   

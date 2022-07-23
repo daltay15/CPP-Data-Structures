@@ -1,3 +1,8 @@
+/*
+    Queue implemented using array
+*/
+
+
 #include <iostream>
 #include <cstdlib>
 
@@ -68,27 +73,27 @@ public:
             rear = 0;
         }
         else
-        {
-            rear++;
+        {   
+            rear++; 
         }
-        A[rear] = data;
-        cout << "Element " << data << " is inserted" << endl;
+        A[rear] = data; 
+        cout << "Element " << data << " is inserted" << endl;   
         count++;
     }
 
     void dequeue()          // Remove an element from the front of the queue
     {
-        if (isEmpty())
+        if (isEmpty())  
         {
             cout << "Queue is empty" << endl;
             return;
         }
-        else if (front == rear)
+        else if (front == rear) // if only one element is present
         {
             front = -1;
             rear = -1;
         }
-        else
+        else    
         {
             cout << "Element " << A[front] << " is deleted" << endl;
             front++;

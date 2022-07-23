@@ -65,11 +65,11 @@ public:
         return false;
     }
 
-    int result(char c, int x, int y)
+    int result(char c, int x, int y)    // evaluate the postfix expression        
     {
-        if (c == '+')
-        {
-            return y + x;
+        if (c == '+')       
+        {   
+            return y + x;   
         }
         else if (c == '-')
         {
@@ -89,10 +89,10 @@ public:
         }
     }
 
-    int convertCharToInt(char c)
+    int convertCharToInt(char c)    // convert char to int
     {
-        int val;
-        val = c;
+        int val;    
+        val = c;    
         return int(val - '0');
     }
 
@@ -102,14 +102,14 @@ public:
         {
             if (c[i] == '+' || c[i] == '-' || c[i] == '*' || c[i] == '/')
             {
-                int x = pop();
-                int y = pop();
-                int answer = result(c[i], x, y);
-                push(answer);
+                int x = pop();  // pop the first element      
+                int y = pop();  // pop the second element      
+                int answer = result(c[i], x, y);    // evaluate the expression
+                push(answer);   // push the answer to the stack
             }
-            else if(isdigit(c[i]) > 0)
+            else if(isdigit(c[i]) > 0)  // if the element is a number
             {
-                push(convertCharToInt(c[i]));
+                push(convertCharToInt(c[i]));   // convert the number to int and push it to the stack
             }
         }
         cout << "The answer is: " << pop() << endl;
