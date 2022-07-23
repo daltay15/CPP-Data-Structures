@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <charconv>
 
 using namespace std;
 
@@ -35,6 +36,7 @@ public:
         if (isEmpty()) // if the stack is empty
         {
             cout << "ERROR: The stack is empty" << endl;
+            cout << "Check the expression" << endl;
             return '\0';
         }
         return A[top--]; // pop the element from the stack
@@ -102,7 +104,8 @@ public:
             {
                 int x = pop();
                 int y = pop();
-                push(result(c[i], x, y));
+                int answer = result(c[i], x, y);
+                push(answer);
             }
             else if(isdigit(c[i]) > 0)
             {
