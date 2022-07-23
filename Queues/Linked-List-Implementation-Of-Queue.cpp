@@ -41,7 +41,7 @@ public:
 
     bool isEmpty() // Check if queue is empty
     {
-        if (front == NULL && rear == NULL)
+        if (front == NULL && rear == NULL) 
         {
             return true;
         }
@@ -50,7 +50,7 @@ public:
 
     bool isFull() // Check if queue is full
     {
-        if (rear->next == NULL)
+        if (rear->next == NULL) // rear->next is NULL because rear is the last node
         {
             return true;
         }
@@ -119,8 +119,8 @@ public:
         }
         count--;
         cout << "Element " << front->data << " is deleted" << endl;
-        }
     }
+    
 };
 
 int main()
