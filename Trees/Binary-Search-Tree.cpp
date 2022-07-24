@@ -63,6 +63,11 @@ bool search(BstNode *root, int data)
     return false;
 }
 
+bool isBinarySearchTree(BstNode *root)
+{
+    
+}
+
 int findMin(BstNode *root)
 {
     if (root == NULL) // If root is NULL, return -1
