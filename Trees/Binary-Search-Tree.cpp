@@ -95,7 +95,6 @@ bool search(BstNode *root, int data)
 {
     if (root == NULL) // If root is NULL, then the tree is empty
     {
-        cout << "ERROR: Tree is empty" << endl;
         return false;
     }
     else if (data == root->data) // If found
@@ -126,6 +125,22 @@ int findMin(BstNode *root)
     else // Recursively traverse the left children until min number found
     {
         return findMin(root->left);
+    }
+}
+
+BstNode *utilFindMin(BstNode *root) // Find min numbers address for use in other functions
+{
+    if (root == NULL) // If root is NULL, return NULL
+    {
+        return NULL;
+    }
+    else if (root->left == NULL) // If root has no left children, return root
+    {
+        return root;
+    }
+    else // Recursively traverse the left children until min number found
+    {
+        return utilFindMin(root->left);
     }
 }
 
@@ -185,6 +200,33 @@ bool isBST(struct BstNode *root)    // Popular Interview question
 
     /* passing all that, it's a BST */
     return true;
+}
+
+BstNode *getSuccessor(BstNode *root, int data)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+    else if (data < root->data) // If data is less than root, search left child
+    {
+        return getSuccessor(root->left, data);
+    }
+    else if (data > root->data) // If data is greater than root, search right child
+    {
+        return getSuccessor(root->right, data);
+    }
+    else // If data is equal to root, return inorder successor
+    {
+        if (root->right != NULL) // If root has right child, return min value in right child
+        {
+            return utilFindMin(root->right);
+        }
+        else // If root has no right child, return NULL
+        {
+            return NULL;
+        }
+    }
 }
 
 void levelOrder(BstNode *root)
@@ -261,7 +303,8 @@ int main()
     root = insert(root, 14);
     root = insert(root, 21);
     root = insert(root, 22);
-
+    
+    cout << "Successor of " << root->left->data << " is " << getSuccessor(root, root->left->data)->data << endl;
 
     cout << "The smallest number in the tree is: " << findMin(root) << endl;
     cout << "The largest number in the tree is: " << findMax(root) << endl;
