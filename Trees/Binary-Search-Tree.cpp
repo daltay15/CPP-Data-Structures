@@ -31,21 +31,71 @@ BstNode *insert(BstNode *root, int data)
         root = getNewNode(data);
         return root;
     }
-    else if (data <= root->data) // If data is less than root, insert in left child
+    else if (data < root->data) // If data is less than root, insert in left child
     {
         root->left = insert(root->left, data);
     }
-    else if (data > root->data) // If data is greater than root, insert in right child
+    else // If data is greater than root, insert in right child
     {
         root->right = insert(root->right, data);
     }
     return root;
 }
 
+BstNode *deleteData(BstNode *root, int data)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+    else if (data < root->data) // If data is less than root, delete in left child
+    {
+        root->left = deleteData(root->left, data);
+    }
+    else if (data > root->data) // If data is greater than root, delete from right child
+    {
+        root->right = deleteData(root->right, data);
+    }
+    else    // If data is equal to root, delete it
+    {
+        if (root->left == NULL && root->right == NULL)  // If root has no children
+        {
+            delete root;
+            root = NULL;
+        }
+        else if (root->left == NULL) // If root has only right child
+        {
+            BstNode *temp = root;
+            root = root->right;
+            delete temp;
+        }
+        else if (root->right == NULL)   // If root has only left child
+        {
+            BstNode *temp = root;
+            root = root->left;
+            delete temp;
+        }
+        else // If root has both children
+        {
+            BstNode *temp = root->right;    
+            while (temp->left != NULL)  // Find inorder successor
+            {
+                temp = temp->left;
+            }
+            root->data = temp->data;    // Copy inorder successor data to root
+            root->right = deleteData(root->right, temp->data); // Delete inorder successor
+        }
+    }
+    return root;
+}
+ 
+
+
 bool search(BstNode *root, int data)
 {
     if (root == NULL) // If root is NULL, then the tree is empty
     {
+        cout << "ERROR: Tree is empty" << endl;
         return false;
     }
     else if (data == root->data) // If found
@@ -63,16 +113,10 @@ bool search(BstNode *root, int data)
     return false;
 }
 
-bool isBinarySearchTree(BstNode *root)
-{
-    
-}
-
 int findMin(BstNode *root)
 {
     if (root == NULL) // If root is NULL, return -1
     {
-        cout << "ERROR: Tree is empty" << endl;
         return -1;
     }
     else if (root->left == NULL) // If root has no left children, return data
@@ -89,7 +133,6 @@ int findMax(BstNode *root)
 {
     if (root == NULL) // If root is NULL, return -1
     {
-        cout << "ERROR: Tree is empty" << endl;
         return -1;
     }
     else if (root->right == NULL) // If root has no right children, return data
@@ -123,33 +166,54 @@ int findHeight(BstNode *root)
     }
 }
 
+bool isBST(struct BstNode *root)    // Popular Interview question
+{
+    if (root == NULL)
+        return true;
+
+    /* false if left is > than root */
+    if (root->left != NULL && root->left->data > root->data)
+        return false;
+
+    /* false if right is < than root */
+    if (root->right != NULL && root->right->data < root->data)
+        return false;
+
+    /* false if, recursively, the left or right is not a BST */
+    if (!isBST(root->left) || !isBST(root->right))
+        return false;
+
+    /* passing all that, it's a BST */
+    return true;
+}
+
 void levelOrder(BstNode *root)
 {
     if (root == NULL)
     {
         return;
     }
-    queue<BstNode*> Q;  // Create a queue to store the nodes
+    queue<BstNode *> Q; // Create a queue to store the nodes
     Q.push(root);       // Push root to the queue
     while (!Q.empty())  // While queue is not empty
     {
-        BstNode *current = Q.front();   // Get the front node
-        cout << current->data << " ";   // Print the data
-        if (current->left != NULL)  // If left chhild exists, push to queue
+        BstNode *current = Q.front(); // Get the front node
+        cout << current->data << " "; // Print the data
+        if (current->left != NULL)    // If left chhild exists, push to queue
         {
-            Q.push(current->left);  // Push left child to queue
+            Q.push(current->left); // Push left child to queue
         }
-        if (current->right != NULL) // If right child exists, pusht to queue 
+        if (current->right != NULL) // If right child exists, pusht to queue
         {
             Q.push(current->right); // Push right child to queue
         }
-        Q.pop();                  // Pop the front node
+        Q.pop(); // Pop the front node
     }
 }
 
-void preOrder(BstNode *root)  // Recursive pre-order traversal <DLR>
+void preOrder(BstNode *root) // Recursive pre-order traversal <DLR>
 {
-    if (root == NULL)   
+    if (root == NULL)
     {
         return;
     }
@@ -169,7 +233,7 @@ void inOrder(BstNode *root) // Recusive in-order traversal <LDR>
     inOrder(root->right);
 }
 
-void postOrder(BstNode *root)   // Recursive post-order traversal <LRD>
+void postOrder(BstNode *root) // Recursive post-order traversal <LRD>
 {
     if (root == NULL)
     {
@@ -180,29 +244,37 @@ void postOrder(BstNode *root)   // Recursive post-order traversal <LRD>
     cout << root->data << " ";
 }
 
-
 int main()
 {
     BstNode *root = NULL; // Initialize root to NULL
     root = insert(root, 12);
     root = insert(root, 10);
     root = insert(root, 20);
-    root = insert(root, 25);
     root = insert(root, 15);
+    root = insert(root, 25);
     root = insert(root, 17);
-    root = insert(root, 16);
     root = insert(root, 18);
     root = insert(root, 19);
+    root = insert(root, 16);
+    root = insert(root, 11);
+    root = insert(root, 13);
+    root = insert(root, 14);
     root = insert(root, 21);
     root = insert(root, 22);
-    root = insert(root, 23);
-    root = insert(root, 24);
+
 
     cout << "The smallest number in the tree is: " << findMin(root) << endl;
     cout << "The largest number in the tree is: " << findMax(root) << endl;
     cout << "The height of the tree is: " << findHeight(root) << endl;
 
     cout << "Level Order Traversal: ";
+    levelOrder(root);
+    cout << endl;
+
+    root = deleteData(root, 12);
+    root = deleteData(root, 14);
+
+    cout << "Level Order Traversal After Deletion: ";
     levelOrder(root);
     cout << endl;
 
@@ -217,6 +289,15 @@ int main()
     cout << "Post Order Traversal: ";
     postOrder(root);
     cout << endl;
+
+    if (isBST(root))
+    {
+        cout << "The tree is a binary search tree" << endl;
+    }
+    else
+    {
+        cout << "The tree is not a binary search tree" << endl;
+    }
 
     int number;
     cout << "Enter a number to search: ";
