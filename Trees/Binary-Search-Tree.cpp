@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <queue>
 
 using namespace std;
 
@@ -117,6 +118,64 @@ int findHeight(BstNode *root)
     }
 }
 
+void levelOrder(BstNode *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    queue<BstNode*> Q;  // Create a queue to store the nodes
+    Q.push(root);       // Push root to the queue
+    while (!Q.empty())  // While queue is not empty
+    {
+        BstNode *current = Q.front();   // Get the front node
+        cout << current->data << " ";   // Print the data
+        if (current->left != NULL)  // If left chhild exists, push to queue
+        {
+            Q.push(current->left);  // Push left child to queue
+        }
+        if (current->right != NULL) // If right child exists, pusht to queue 
+        {
+            Q.push(current->right); // Push right child to queue
+        }
+        Q.pop();                  // Pop the front node
+    }
+}
+
+void preOrder(BstNode *root)  // Recursive pre-order traversal <DLR>
+{
+    if (root == NULL)   
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+void inOrder(BstNode *root) // Recusive in-order traversal <LDR>
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inOrder(root->left);
+    cout << root->data << " ";
+    inOrder(root->right);
+}
+
+void postOrder(BstNode *root)   // Recursive post-order traversal <LRD>
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->data << " ";
+}
+
+
 int main()
 {
     BstNode *root = NULL; // Initialize root to NULL
@@ -134,10 +193,26 @@ int main()
     root = insert(root, 23);
     root = insert(root, 24);
 
-
     cout << "The smallest number in the tree is: " << findMin(root) << endl;
     cout << "The largest number in the tree is: " << findMax(root) << endl;
     cout << "The height of the tree is: " << findHeight(root) << endl;
+
+    cout << "Level Order Traversal: ";
+    levelOrder(root);
+    cout << endl;
+
+    cout << "Pre Order Traversal: ";
+    preOrder(root);
+    cout << endl;
+
+    cout << "In Order Traversal: ";
+    inOrder(root);
+    cout << endl;
+
+    cout << "Post Order Traversal: ";
+    postOrder(root);
+    cout << endl;
+
     int number;
     cout << "Enter a number to search: ";
     cin >> number;
