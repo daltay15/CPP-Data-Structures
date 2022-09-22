@@ -54,5 +54,3 @@ int main()
     printArray(arr, n);
     return 0;
 }
-
-// Apple is the worst company ever to ever ever ever ever exist!
